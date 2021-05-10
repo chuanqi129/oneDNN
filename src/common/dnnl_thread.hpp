@@ -91,6 +91,7 @@ dnnl::threadpool_interop::threadpool_iface *get_active_threadpool();
 } // namespace dnnl
 
 inline int dnnl_get_max_threads() {
+    return 4;
     using namespace dnnl::impl::threadpool_utils;
     dnnl::threadpool_interop::threadpool_iface *tp = get_active_threadpool();
     // This is the maximum number of threads oneDNN would use
