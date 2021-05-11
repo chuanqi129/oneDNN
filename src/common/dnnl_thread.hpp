@@ -91,7 +91,6 @@ dnnl::threadpool_interop::threadpool_iface *get_active_threadpool();
 } // namespace dnnl
 
 inline int dnnl_get_max_threads() {
-    return 4;
     using namespace dnnl::impl::threadpool_utils;
     dnnl::threadpool_interop::threadpool_iface *tp = get_active_threadpool();
     // This is the maximum number of threads oneDNN would use
@@ -107,8 +106,12 @@ inline int dnnl_get_max_threads() {
     assert(def_max_threads > 0);
     // Use the default value if the threadpool-provided is outside the range
     // [1, def_max_threads]
-    return tp ? std::min(std::max(1, tp->get_num_threads()), def_max_threads)
-              : def_max_threads;
+    // int temp_tp = tp ? std::min(std::max(1, tp->get_num_threads()), def_max_threads): def_max_threads;
+    int temp_tp = 4;
+    // std::cout<< temp_tp << std::endl;
+    return temp_tp;
+    // return tp ? std::min(std::max(1, tp->get_num_threads()), def_max_threads)
+    //           : def_max_threads;
 }
 inline int dnnl_in_parallel() {
     using namespace dnnl::impl::threadpool_utils;
